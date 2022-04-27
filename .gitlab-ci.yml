@@ -1,0 +1,21 @@
+stages:
+  -  🐳build
+
+build-front:
+  image: docker:stable-dind
+  stage: 🐳build
+  variables:
+    BUILD_CONTEXT: "."
+    DOCKER_FILE: "Dockerfile"
+    IMAGE_NAME: "${CI_PROJECT_PATH}"
+  script: |
+    echo "Build de l'image ${REGISTRY}${IMAGE_NAME}/${CI_COMMIT_REF_NAME}:${CI_COMMIT_SHA:0:8}"
+    docker build -f "${BUILD_CONTEXT}/${DOCKER_FILE}" \
+      -t "${REGISTRY}${IMAGE_NAME}/${CI_COMMIT_REF_NAME}:${CI_COMMIT_SHA:0:8}" \
+      -t "${REGISTRY}${IMAGE_NAME}/${CI_COMMIT_REF_NAME}:latest" \
+      "${BUILD_CONTEXT}"
+    docker push "${REGISTRY}${IMAGE_NAME}/${CI_COMMIT_REF_NAME}:${CI_COMMIT_SHA:0:8}"
+    docker push "${REGISTRY}${IMAGE_NAME}/${CI_COMMIT_REF_NAME}:latest"
+
+
+
