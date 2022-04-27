@@ -8,3 +8,5 @@ RUN npm install
 COPY . /app
 
 RUN npx hardhat compile
+
+CMD npx hardhat run scripts/deploy.js --network rinkeby
