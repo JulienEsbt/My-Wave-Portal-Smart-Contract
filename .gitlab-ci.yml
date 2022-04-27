@@ -1,7 +1,7 @@
 stages:
   -  🐳build
 
-build-front:
+build-back:
   image: docker:stable-dind
   stage: 🐳build
   variables:
