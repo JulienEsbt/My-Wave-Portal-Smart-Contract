@@ -17,12 +17,15 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
+
+const API_URL = process.env.API_URL
+const PRIVATE_KEY = process.env.PRIVATE_KEY
 module.exports = {
   solidity: "0.8.0",
   networks: {
     rinkeby: {
-      url: "https://eth-rinkeby.alchemyapi.io/v2/AbcUup-ussWTFlWAjQ6iSaEzdIvZpOZK",
-      accounts: ["329dbeab55c08f6ed56d29af9ac44dc74e6d6380c12e4d938abf4664cd227f81"]
+      url: API_URL,
+      accounts: [PRIVATE_KEY]
     },
   },
 };
